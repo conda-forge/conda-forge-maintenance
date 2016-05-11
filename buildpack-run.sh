@@ -16,6 +16,12 @@ env_dir=$(cd "$3/" && pwd)
 # from the environment directory.
 export "GH_TOKEN=$(cat $env_dir/GH_TOKEN)"
 
+# -------
+
+# Install vim
+mkdir $STORAGE_LOCN/.vim
+curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C $STORAGE_LOCN/.vim
+
 # ----------
 
 wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -31,7 +37,8 @@ mkdir -p $build/.profile.d
 cat <<-'EOF' > $build/.profile.d/conda.sh
     # append to path variable
     export PATH=$HOME/.conda/bin:$PATH
-    
+    export PATH=$HOME/.vim/bin:$PATH
+
     # set default encoding to UTF-8
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8  
@@ -49,15 +56,6 @@ git clone $REPOSRC $LOCALREPO
 mkdir -p $STORAGE_LOCN/.conda-smithy
 ln -s $STORAGE_LOCN/.conda-smithy $HOME/.conda-smithy
 echo $GH_TOKEN > ~/.conda-smithy/github.token
-
-# -------
-
-# Install vim
-#mkdir $STORAGE_LOCN/vim
-#cd $STORAGE_LOCN/vim
-#curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C $STORAGE_LOCN/vim
-#export PATH=$PATH:$STORAGE_LOCN/vim/bin
-#cd $STORAGE_LOCN
 
 # -------
 
