@@ -26,7 +26,7 @@ curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | ta
 
 wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p $HOME/.conda
-$HOME/.conda/bin/conda install -c conda-forge --yes conda-smithy=0.10.4
+$HOME/.conda/bin/conda install -c conda-forge --yes conda-smithy=0.10.4 python=3
 
 # Patch conda-smithy to use https not ssh (We don't have ssh keys on heroku)
 sed -i 's/repo.ssh_url/repo.clone_url/g' $HOME/.conda/lib/python3.5/site-packages/conda_smithy/feedstocks.py
