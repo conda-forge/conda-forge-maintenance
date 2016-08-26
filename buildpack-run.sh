@@ -22,6 +22,25 @@ export "GH_TOKEN=$(cat $env_dir/GH_TOKEN)"
 mkdir $STORAGE_LOCN/.vim
 curl https://s3.amazonaws.com/heroku-vim/vim-7.3.tar.gz --location --silent | tar xz -C $STORAGE_LOCN/.vim
 
+# Configure vim
+
+cat <<-'EOF' > ${STORAGE_LOCN}/.vimrc
+    set backspace=indent,eol,start
+    set ruler
+    set hls
+    filetype indent on
+
+    set tabstop=4
+    set shiftwidth=4
+    set expandtab
+
+    set viminfo='10,\"100,:20,%,n~/.viminfo
+
+    if has("autocmd")
+           au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    endif
+EOF
+
 # ----------
 
 wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -42,6 +61,15 @@ cat <<-'EOF' > $build/.profile.d/conda.sh
     # set default encoding to UTF-8
     export LC_ALL=C.UTF-8
     export LANG=C.UTF-8  
+EOF
+
+
+cat <<-'EOF' > ${STORAGE_LOCATION}/.condarc
+    channels:
+      - conda-forge
+      - defaults
+    show_channel_urls: true
+    add_pip_as_python_dependency: false
 EOF
 
 # -------
