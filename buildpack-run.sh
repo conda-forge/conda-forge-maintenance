@@ -64,7 +64,7 @@ cat <<-'EOF' > $build/.profile.d/conda.sh
 EOF
 
 
-cat <<-'EOF' > ${STORAGE_LOCATION}/.condarc
+cat <<-EOF > $STORAGE_LOCN/.condarc
     channels:
       - conda-forge
       - defaults
