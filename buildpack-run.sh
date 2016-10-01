@@ -90,5 +90,8 @@ echo $GH_TOKEN > ~/.conda-smithy/github.token
 mkdir -p $STORAGE_LOCN/feedstocks
 $HOME/.conda/bin/feedstocks clone --feedstocks-dir $STORAGE_LOCN/feedstocks
 
+# Rename origin -> upstream universally.
+$HOME/.conda/bin/feedstocks apply-cloned --feedstocks-directory $STORAGE_LOCN/feedstocks git remote rename origin upstream
+
 # -------
 
