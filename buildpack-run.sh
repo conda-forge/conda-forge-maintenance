@@ -45,7 +45,7 @@ EOF
 
 wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
 bash miniconda.sh -b -p "${HOME}/.conda"
-"${HOME}/.conda/bin/conda" install -c conda-forge --yes conda-execute conda-smithy python=3
+"${HOME}/.conda/bin/conda" install -c conda-forge --yes git conda-execute conda-smithy python=3
 "${HOME}/.conda/bin/conda" clean -tipsy
 
 # Patch conda-smithy to use https not ssh (We don't have ssh keys on heroku)
